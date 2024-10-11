@@ -20,7 +20,7 @@ type Client struct {
 func New(appId, appSecurity string) *Client {
 	client := &Client{appId: appId, appSecurity: appSecurity}
 	client.HttpClient = reqclient.C().SetTimeout(time.Second * 10).SetCommonRetryCount(2)
-	client.HttpClient.SetBaseURL("https://api.shumaidata.com").SetUserAgent("").DevMode()
+	client.HttpClient.SetBaseURL("https://api.shumaidata.com").SetUserAgent("")
 	return client
 }
 
