@@ -2,11 +2,9 @@ module github.com/cyjaysong/shumaiapi-go
 
 go 1.22.0
 
-toolchain go1.22.6
-
 require (
-	github.com/bytedance/sonic v1.12.2
-	github.com/imroc/req/v3 v3.46.0
+	github.com/bytedance/sonic v1.12.3
+	github.com/imroc/req/v3 v3.47.0
 )
 
 require (

@@ -29,7 +29,7 @@ type BankBranchQueryRes struct {
 			Province   string           `json:"province"`          //输入的省
 			City       string           `json:"city"`              //输入的市
 			Record     []LianHangRecord `json:"record"`
-			Page       int              `json:"page"`
+			Page       int              `json:"page,string"`
 			Card       string           `json:"card"`
 			Key        string           `json:"key"`
 		} `json:"result"`
