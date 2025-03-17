@@ -8,9 +8,7 @@ import (
 
 func TestBankInfo(t *testing.T) {
 	req := &bank.BankInfoReq{Bankcard: "4563514204078808813"}
-	req.AppId, req.Timestamp, req.Sign = client.Sign()
-	res := &bank.BankInfoRes{}
-	err := client.Get(req.Path(), req, res)
+	res, err := req.Do(client)
 	if err != nil {
 		t.Error(err)
 	}
@@ -19,9 +17,7 @@ func TestBankInfo(t *testing.T) {
 
 func TestLianHangQuery(t *testing.T) {
 	req := &bank.BankBranchQueryReq{Bankcard: "4563514204078808813"}
-	req.AppId, req.Timestamp, req.Sign = client.Sign()
-	res := &bank.BankBranchQueryRes{}
-	err := client.Get(req.Path(), req, res)
+	res, err := req.Do(client)
 	if err != nil {
 		t.Error(err)
 	}

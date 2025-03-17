@@ -1,5 +1,7 @@
 package bank
 
+import "github.com/cyjaysong/shumaiapi-go"
+
 type BankBranchQueryReq struct {
 	AppId     string `json:"appid"`              // 服务商分配的唯一标识
 	Timestamp string `json:"timestamp"`          // 当前时间的毫秒数
@@ -12,28 +14,28 @@ type BankBranchQueryReq struct {
 	Page      int    `json:"page,omitempty"`     // 页数 1-5页，默认第一页
 }
 
-func (BankBranchQueryReq) Path() string {
-	return "/v2/lianhang/query"
+func (req *BankBranchQueryReq) Do(cli *shumaiapi.Client) (res *shumaiapi.BaseRes[BankBranchQueryResData], err error) {
+	req.AppId, req.Timestamp, req.Sign = cli.Sign()
+	res = &shumaiapi.BaseRes[BankBranchQueryResData]{}
+	if err = cli.Get("/v2/lianhang/query", req, res); err != nil {
+		return nil, err
+	}
+	return
 }
 
-type BankBranchQueryRes struct {
-	Msg     string `json:"msg"`
-	Success bool   `json:"success"`
-	Code    int    `json:"code"`
-	Data    struct {
-		OrderNo string `json:"order_no"` //订单号
-		Result  struct {
-			Totalpage  int              `json:"totalpage,string"`  //总页数
-			Totalcount int              `json:"totalcount,string"` //总记录数
-			Bank       string           `json:"bank"`              //输入的银行名称
-			Province   string           `json:"province"`          //输入的省
-			City       string           `json:"city"`              //输入的市
-			Record     []LianHangRecord `json:"record"`
-			Page       int              `json:"page,string"`
-			Card       string           `json:"card"`
-			Key        string           `json:"key"`
-		} `json:"result"`
-	} `json:"data"`
+type BankBranchQueryResData struct {
+	OrderNo string `json:"order_no"` //订单号
+	Result  struct {
+		Totalpage  int              `json:"totalpage,string"`  //总页数
+		Totalcount int              `json:"totalcount,string"` //总记录数
+		Bank       string           `json:"bank"`              //输入的银行名称
+		Province   string           `json:"province"`          //输入的省
+		City       string           `json:"city"`              //输入的市
+		Record     []LianHangRecord `json:"record"`
+		Page       int              `json:"page,string"`
+		Card       string           `json:"card"`
+		Key        string           `json:"key"`
+	} `json:"result"`
 }
 
 type LianHangRecord struct {
