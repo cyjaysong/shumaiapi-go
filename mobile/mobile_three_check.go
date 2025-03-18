@@ -21,13 +21,13 @@ func (req *MobileThreeCheckReq) Do(cli *shumaiapi.Client) (res *shumaiapi.BaseRe
 }
 
 type MobileThreeCheckResData struct {
-	OrderNo  string `json:"order_no"` // 订单号
-	Result   string `json:"result"`   // 验证结果 0: 一致，收费；1: 不一致，收费；2: 无记录，不收费
-	Desc     string `json:"desc"`     // 结果描述
-	Channel  string `json:"channel"`  // 运营商 cmcc:移动；cucc:联通；ctcc:电信；gdcc:广电
-	Sex      string `json:"sex"`      // 性别
-	Birthday string `json:"birthday"` // 生日
-	Address  string `json:"address"`  // 籍贯
+	OrderNo  string `json:"order_no"`      // 订单号
+	Result   int    `json:"result,string"` // 验证结果 0: 一致，收费；1: 不一致，收费；2: 无记录，不收费
+	Desc     string `json:"desc"`          // 结果描述
+	Channel  string `json:"channel"`       // 运营商 cmcc:移动；cucc:联通；ctcc:电信；gdcc:广电
+	Sex      string `json:"sex"`           // 性别
+	Birthday string `json:"birthday"`      // 生日
+	Address  string `json:"address"`       // 籍贯
 }
 
 type MobileThreeDetailCheckReq struct {

@@ -15,6 +15,9 @@ type BankBranchQueryReq struct {
 }
 
 func (req *BankBranchQueryReq) Do(cli *shumaiapi.Client) (res *shumaiapi.BaseRes[BankBranchQueryResData], err error) {
+	if req.City == req.Province {
+		req.City = ""
+	}
 	req.AppId, req.Timestamp, req.Sign = cli.Sign()
 	res = &shumaiapi.BaseRes[BankBranchQueryResData]{}
 	if err = cli.Get("/v2/lianhang/query", req, res); err != nil {
